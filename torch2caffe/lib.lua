@@ -12,6 +12,10 @@ require 'nn'
 
 local pl = require 'pl.import_into'()
 local py = require 'fb.python'
+local sys = py.import('sys')
+sys.path.append("/home/lochappy/libs/fb-caffe-exts")
+sys.path.append("/home/lochappy/caffe-master/distribute/python")
+py.import('caffe')
 local torch = require 'torch'
 require 'fbtorch'
 -- local logging = require 'fb.util.logging'

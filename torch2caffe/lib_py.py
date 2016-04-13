@@ -14,6 +14,9 @@ from __future__ import unicode_literals
 import collections
 import logging
 
+import sys
+sys.path.append("/home/lochappy/caffe-master/distribute/python")
+
 import caffe
 import torch2caffe.caffe_layers
 import torch2caffe.caffe_builder
