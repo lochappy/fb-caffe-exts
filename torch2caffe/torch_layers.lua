@@ -9,7 +9,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 local M = {}
 
 local py = require 'fb.python'
-local logging = require 'fb.util.logging'
+-- local logging = require 'fb.util.logging'
 local pl = require('pl.import_into')()
 
 -- Various libraries for loading Torch layers.
@@ -229,7 +229,7 @@ M.CONVERTER = {
         typename='caffe.Flatten',
         layer=function(layer)
             if layer.size:size() ~= 1 then
-                logging.fatalf("Only handle nn.View(k) for now")
+                error("Only handle nn.View(k) for now")
             end
             return {}
         end},
@@ -252,7 +252,7 @@ M.CONVERTER = {
         typename='caffe.Flatten',
         layer=function(layer)
             if layer.size:size() ~= 1 then
-                logging.fatalf("Only handle nn.Reshape(k) for now")
+                error("Only handle nn.Reshape(k) for now")
             end
             return {}
         end},
@@ -265,7 +265,7 @@ function M.add(net, layer, bottom_edges, top_edges)
             return converter(net, layer, bottom_edges, top_edges)
         end
     end
-    logging.fatalf("Unknown layer type: %s, known types: %s",
+    error("Unknown layer type: %s, known types: %s",
                    layer_type,
                    pl.stringx.join(", ", pl.tablex.keys(M.CONVERTER)))
 end
